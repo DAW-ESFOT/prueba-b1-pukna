@@ -17,7 +17,18 @@ class CreateGenresTable extends Migration
             $table->bigIncrements('id');
             $table->string('name',40);
             $table->timestamps();
+
         });
+
+        Schema::create('genre_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('genre_id');
+            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('restrict');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->timestamps();
+        });
+
+
     }
 
     /**
@@ -27,6 +38,9 @@ class CreateGenresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('genres');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('genre_user');
+        Schema::enableForeignKeyConstraints();
+
     }
 }

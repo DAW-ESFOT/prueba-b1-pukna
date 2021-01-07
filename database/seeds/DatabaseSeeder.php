@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         schema::disableForeignKeyConstraints();
         $this->call(GenresTableSeeder::class);
         $this->call(MoviesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
         schema::enableForeignKeyConstraints();
 
     }

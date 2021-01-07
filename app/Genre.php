@@ -8,5 +8,9 @@ class Genre extends Model
 {
     protected $fillable = ['name'];
     public function movies() {
-        return $this->hasMany('App\Movie'); }
+        return $this->hasMany('App\Movie');
+    }
+    public function users()     {
+        return $this->belongsToMany('App\User')->withTimestamps();
+    }
 }
